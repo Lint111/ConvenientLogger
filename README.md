@@ -245,6 +245,45 @@ public class Logger
 }
 ```
 
+### ILoggable & LoggableBase
+
+```csharp
+public interface ILoggable
+{
+    Logger Logger { get; }
+    bool IsLoggingEnabled { get; }
+    void RegisterToParentLogger(Logger parentLogger)
+    void DeregisterFromParentLogger()
+}
+
+public abstract class LoggableBase : ILoggable
+{
+    // Properties
+    Logger Logger { get; }
+    bool IsLoggingEnabled { get; }
+    
+    // Setup
+    protected void InitializeLogger(string name, bool enabled = false, int bufferCapacity = 500)
+    
+    // Parent Registration
+    void RegisterToParentLogger(Logger parentLogger)
+    void DeregisterFromParentLogger()
+    
+    // Control
+    void EnableLogging(bool consoleOutput = false)
+    void DisableLogging()
+    
+    // Logging (protected)
+    protected bool ShouldLog(LogLevel level)
+    protected void LogTrace(string message, ...)
+    protected void LogDebug(string message, ...)
+    protected void LogInfo(string message, ...)
+    protected void LogWarning(string message, ...)
+    protected void LogError(string message, ...)
+    protected void LogCritical(string message, ...)
+}
+```
+
 ### LoggerRegistry
 
 ```csharp

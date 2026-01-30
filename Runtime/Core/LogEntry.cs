@@ -132,7 +132,7 @@ namespace ConvenientLogger
 
     /// <summary>
     /// Ring buffer for storing log entries with bounded memory.
-    /// Thread-safe for single writer, multiple reader scenarios.
+    /// Thread-safe with full mutual exclusion (single lock for all operations).
     /// </summary>
     public class LogBuffer
     {
