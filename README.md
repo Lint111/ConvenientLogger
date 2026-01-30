@@ -207,8 +207,6 @@ public class Logger
     bool IncludeSourceInfo { get; set; }
     
     // Group Assignment
-    bool IsCodeChild { get; }        // True if created via CreateChild
-    bool CanAssignToGroup { get; }   // True if can be assigned to group
     Logger GroupParent { get; }      // Current group assignment
     void AssignToGroup(Logger groupLogger)
     void RemoveFromGroup()
@@ -295,7 +293,7 @@ public static class LoggerRegistry
     
     // Get/Create
     static Logger Get(string path)
-    static Logger GetOrCreate(string path, bool enabled = false)
+    static Logger GetOrCreate(string path, bool startEnabled = false)
     
     // Registration
     static void Register(Logger logger)

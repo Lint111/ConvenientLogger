@@ -93,10 +93,12 @@ namespace ConvenientLogger
         /// Gets or creates a logger at the specified path.
         /// Creates parent loggers as needed.
         /// Intermediate path segments are enabled by default (they're structural, not explicit loggers).
-        /// Only the final logger uses the 'enabled' parameter.
+        /// Only the final logger uses the 'startEnabled' parameter.
         /// Uses span-based path iteration to minimize allocations.
         /// </summary>
-        public static Logger GetOrCreate(string path, bool enabled = false)
+        /// <param name="path">Hierarchical path like "System/Subsystem/Component"</param>
+        /// <param name="startEnabled">Initial enabled state for the final logger. Default false (opt-in logging).</param>
+        public static Logger GetOrCreate(string path, bool startEnabled = false)
         {
             // Build the full path including Root prefix for cache lookup
             var fullPathWithRoot = string.Concat("Root/", path);
@@ -155,8 +157,8 @@ namespace ConvenientLogger
                         // Use CreateRegistryChild so these loggers can be assigned to groups
                         var newLogger = current.CreateRegistryChild(part);
                         // Intermediate loggers are enabled by default (structural only)
-                        // Final logger uses the requested 'enabled' state
-                        newLogger.Enabled = isLastPart ? enabled : true;
+                        // Final logger uses the requested 'startEnabled' state
+                        newLogger.Enabled = isLastPart ? startEnabled : true;
                         Register(newLogger);
                         current = newLogger;
                     }

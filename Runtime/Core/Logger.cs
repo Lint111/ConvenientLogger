@@ -55,11 +55,15 @@ namespace ConvenientLogger
         
         /// <summary>
         /// Whether this logger was created via CreateChild() and cannot be re-parented.
+        /// Code children have an immutable parent relationship set at construction.
+        /// This is primarily used internally - most users don't need to check this.
         /// </summary>
         public bool IsCodeChild => _isCodeChild;
         
         /// <summary>
-        /// Whether this logger can be assigned to a group (only non-code-children).
+        /// Whether this logger can be assigned to a group via AssignToGroup().
+        /// Returns false for loggers created via CreateChild() (code children).
+        /// Returns true for loggers created via LoggerRegistry.GetOrCreate().
         /// </summary>
         public bool CanAssignToGroup => !_isCodeChild;
         

@@ -146,7 +146,7 @@ namespace ConvenientLogger.Tests.Editor
             var disabledGroup = new Logger("DisabledGroup");
             disabledGroup.Enabled = false;
 
-            var logger = LoggerRegistry.GetOrCreate("Test", enabled: true);
+            var logger = LoggerRegistry.GetOrCreate("Test", startEnabled: true);
             logger.AssignToGroup(enabledGroup);
             Assert.IsTrue(logger.EffectiveEnabled);
 
@@ -181,7 +181,7 @@ namespace ConvenientLogger.Tests.Editor
         {
             var topGroup = new Logger("TopGroup");
             var subGroup = new Logger("SubGroup");
-            var logger = LoggerRegistry.GetOrCreate("Test", enabled: true);
+            var logger = LoggerRegistry.GetOrCreate("Test", startEnabled: true);
 
             // Set up hierarchy: topGroup -> subGroup -> logger
             subGroup.AssignToGroup(topGroup);
@@ -241,7 +241,7 @@ namespace ConvenientLogger.Tests.Editor
             var group = new Logger("Group");
             group.Enabled = true;
 
-            var logger = LoggerRegistry.GetOrCreate("Parent", enabled: true);
+            var logger = LoggerRegistry.GetOrCreate("Parent", startEnabled: true);
             var codeChild = logger.CreateChild("Child");
 
             logger.AssignToGroup(group);

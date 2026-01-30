@@ -156,7 +156,7 @@ namespace ConvenientLogger.Tests.Editor
         [Test]
         public void GetOrCreate_NestedPath_IntermediateLoggersEnabled()
         {
-            var logger = LoggerRegistry.GetOrCreate("A/B/C", enabled: false);
+            var logger = LoggerRegistry.GetOrCreate("A/B/C", startEnabled: false);
 
             // Final logger should be disabled (as requested)
             Assert.IsFalse(logger.Enabled);
@@ -207,8 +207,8 @@ namespace ConvenientLogger.Tests.Editor
         [Test]
         public void EnablePattern_WildcardAll_EnablesAll()
         {
-            var logger1 = LoggerRegistry.GetOrCreate("A", enabled: false);
-            var logger2 = LoggerRegistry.GetOrCreate("B", enabled: false);
+            var logger1 = LoggerRegistry.GetOrCreate("A", startEnabled: false);
+            var logger2 = LoggerRegistry.GetOrCreate("B", startEnabled: false);
 
             LoggerRegistry.EnablePattern("**");
 
@@ -219,9 +219,9 @@ namespace ConvenientLogger.Tests.Editor
         [Test]
         public void EnablePattern_PrefixWildcard_EnablesMatching()
         {
-            var logger1 = LoggerRegistry.GetOrCreate("DMotion/Preview", enabled: false);
-            var logger2 = LoggerRegistry.GetOrCreate("DMotion/Editor", enabled: false);
-            var logger3 = LoggerRegistry.GetOrCreate("Other/Stuff", enabled: false);
+            var logger1 = LoggerRegistry.GetOrCreate("DMotion/Preview", startEnabled: false);
+            var logger2 = LoggerRegistry.GetOrCreate("DMotion/Editor", startEnabled: false);
+            var logger3 = LoggerRegistry.GetOrCreate("Other/Stuff", startEnabled: false);
 
             LoggerRegistry.EnablePattern("Root/DMotion/**");
 
@@ -233,8 +233,8 @@ namespace ConvenientLogger.Tests.Editor
         [Test]
         public void DisablePattern_DisablesMatching()
         {
-            var logger1 = LoggerRegistry.GetOrCreate("Test/A", enabled: true);
-            var logger2 = LoggerRegistry.GetOrCreate("Test/B", enabled: true);
+            var logger1 = LoggerRegistry.GetOrCreate("Test/A", startEnabled: true);
+            var logger2 = LoggerRegistry.GetOrCreate("Test/B", startEnabled: true);
 
             LoggerRegistry.DisablePattern("Root/Test/**");
 
@@ -249,8 +249,8 @@ namespace ConvenientLogger.Tests.Editor
         [Test]
         public void ClearAll_ClearsAllBuffers()
         {
-            var logger1 = LoggerRegistry.GetOrCreate("A", enabled: true);
-            var logger2 = LoggerRegistry.GetOrCreate("B", enabled: true);
+            var logger1 = LoggerRegistry.GetOrCreate("A", startEnabled: true);
+            var logger2 = LoggerRegistry.GetOrCreate("B", startEnabled: true);
             logger1.Info("Message1");
             logger2.Info("Message2");
 
@@ -288,8 +288,8 @@ namespace ConvenientLogger.Tests.Editor
         [Test]
         public void ExtractAll_IncludesAllLoggers()
         {
-            var logger1 = LoggerRegistry.GetOrCreate("Logger1", enabled: true);
-            var logger2 = LoggerRegistry.GetOrCreate("Logger2", enabled: true);
+            var logger1 = LoggerRegistry.GetOrCreate("Logger1", startEnabled: true);
+            var logger2 = LoggerRegistry.GetOrCreate("Logger2", startEnabled: true);
             logger1.Info("Message1");
             logger2.Info("Message2");
 
