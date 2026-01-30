@@ -376,7 +376,7 @@ namespace ConvenientLogger.Editor
                         if (obj is LoggerGroupAsset potentialChild && potentialChild != group)
                         {
                             if (!group.WouldCreateCircularReference(potentialChild) && 
-                                !group.ChildGroups.Contains(potentialChild))
+                                !ContainsChild(group.ChildGroups, potentialChild))
                             {
                                 validDrag = true;
                                 draggedGroup = potentialChild;
@@ -660,6 +660,15 @@ namespace ConvenientLogger.Editor
             }
         }
 
+        private static bool ContainsChild(IReadOnlyList<LoggerGroupAsset> children, LoggerGroupAsset target)
+        {
+            for (int i = 0; i < children.Count; i++)
+            {
+                if (children[i] == target) return true;
+            }
+            return false;
+        }
+
         private void ClearLoggersRecursive(LoggerGroupAsset group)
         {
             // Use paths instead of active loggers to clear all (including inactive)
@@ -667,7 +676,8 @@ namespace ConvenientLogger.Editor
             var paths = group.AssignedLoggerPaths;
             var pathCount = paths.Count;
             var pathsCopy = new string[pathCount];
-            paths.CopyTo(pathsCopy, 0);
+            for (int i = 0; i < pathCount; i++)
+                pathsCopy[i] = paths[i];
             
             foreach (var path in pathsCopy)
             {
