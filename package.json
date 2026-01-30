@@ -1,0 +1,19 @@
+{
+  "name": "com.vixen.convenientlogger",
+  "version": "0.1.0",
+  "displayName": "Convenient Logger",
+  "description": "Low-allocation hierarchical logging system for Unity with per-window filtering and export capabilities.",
+  "unity": "6000.0",
+  "documentationUrl": "https://github.com/yourusername/ConvenientLogger",
+  "keywords": [
+    "logging",
+    "debug",
+    "diagnostics",
+    "editor"
+  ],
+  "author": {
+    "name": "Your Name",
+    "email": "your@email.com"
+  },
+  "dependencies": {}
+}
