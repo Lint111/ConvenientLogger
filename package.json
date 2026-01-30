@@ -4,7 +4,7 @@
   "displayName": "Convenient Logger",
   "description": "Low-allocation hierarchical logging system for Unity with per-window filtering and export capabilities.",
   "unity": "6000.0",
-  "documentationUrl": "https://github.com/yourusername/ConvenientLogger",
+  "documentationUrl": "https://github.com/Lint111/ConvenientLogger",
   "keywords": [
     "logging",
     "debug",
